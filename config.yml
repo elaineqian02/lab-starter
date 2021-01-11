@@ -1,6 +1,6 @@
-title: # a name for your Learning Lab course
-tagline: # a short description for your Learning Lab course, displayed on the course catalog
-description: # a longer description for your Learning Lab course, displayed on the course's landing page
+title: Title
+tagline: Tagline
+description: Description
 
 # Repository setup
 # The following section template information for the repository
@@ -14,7 +14,8 @@ template:
 # Actions to take place after the learner registers, but before they start interacting with their repo
 
 before:
-- type: # the type of action, full list at https://lab.github.com/docs/actions/
+- type: respond
+  with: 01_first-response.md
   # some actions require additional options, those should appear below `type:`
   # you can execute multiple actions in the `before` block
 
@@ -23,38 +24,51 @@ before:
 # Create one step for each action that a learner will complete
 
 steps:
-# Step 1: step 1
-- title: # step 1
-  description: # step 1
-  event: # the event that will trigger the actions to be executed, full list at https://developer.github.com/v3/activity/events/types/
-  actions: # a list of the actions that will occur when the step is triggered by an event
-  - type: # the type of action, full list at https://lab.github.com/docs/actions
+# Step 1: Assignment
+- title: Assign yourself
+  description: Assign the first issue to yourself.
+  event: issues.assigned
+  link: 'https://github.com/elaineqian02/lab-starter/issues/1'
+  actions:
+  - type: gate
+    left: '%payload.pull_request.base.ref%'
+    operator: ===
+    right: main
+    else:
+    - type: respond
+      with: 01_try-again.md
+  - type: respond
+    with: 01_nice-work.md
+#   - type: gate
+#     left: '%payload.pull_request.title%'
+#     operator: ===
+#     right: Add name to README
 
 # Step 2: step 2
-# - title: # step 2
-#  description: # step 2
-#  event: # the event that will trigger the actions to be executed, full list at https://developer.github.com/v3/activity/events/types/
+# - title: title 2
+#  description: desc 2
+#  event: push
 #  actions: # a list of the actions that will occur when the step is triggered by an event
 #  - type: # the type of action, full list at https://lab.github.com/docs/actions
 
 # Step 3: step 3
-# - title: # step 3
-#  description: # step 3
-#  event: # the event that will trigger the actions to be executed, full list at https://developer.github.com/v3/activity/events/types/
+# - title: title 3
+#  description: desc 3
+#  event: fork
 #  actions: # a list of the actions that will occur when the step is triggered by an event
 #  - type: # the type of action, full list at https://lab.github.com/docs/actions
 
 # Step 4: step 4
-# - title: # step 4
-#  description: # step 4
-#  event: # the event that will trigger the actions to be executed, full list at https://developer.github.com/v3/activity/events/types/
+# - title: title 4
+#  description: desc 4
+#  event: status
 #  actions: # a list of the actions that will occur when the step is triggered by an event
 #  - type: # the type of action, full list at https://lab.github.com/docs/actions
 
 # Step 5: step 5
-# - title: # step 5
-#  description: # step 5
-#  event: # the event that will trigger the actions to be executed, full list at https://developer.github.com/v3/activity/events/types/
+# - title: title 5
+#  description: desc 5
+#  event: pull_request.synchronize
 #  actions: # a list of the actions that will occur when the step is triggered by an event
 #  - type: # the type of action, full list at https://lab.github.com/docs/actions
 
