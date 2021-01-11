@@ -24,12 +24,16 @@ before:
 # Create one step for each action that a learner will complete
 
 steps:
-# Step 1: step 1
-- title: title 1
-  description: desc 1
-  event: pull_request.synchronize
-  actions: # a list of the actions that will occur when the step is triggered by an event
-  - type: # the type of action, full list at https://lab.github.com/docs/actions
+# Step 1: Assignment
+- title: Assign yourself
+  description: Assign the first issue to yourself.
+  event: issues.assigned
+  link: 'https://github.com/elaineqian02/lab-starter/issues/1'
+  actions:
+  - type: gate
+    left: '%payload.pull_request.title%'
+    operator: ===
+    right: Add name to README
 
 # Step 2: step 2
 # - title: title 2
@@ -55,7 +59,7 @@ steps:
 # Step 5: step 5
 # - title: title 5
 #  description: desc 5
-#  event: issue_commented.created
+#  event: pull_request.synchronize
 #  actions: # a list of the actions that will occur when the step is triggered by an event
 #  - type: # the type of action, full list at https://lab.github.com/docs/actions
 
