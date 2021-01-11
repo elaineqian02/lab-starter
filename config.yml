@@ -38,9 +38,18 @@ steps:
   link: 'https://github.com/elaineqian02/lab-starter/issues/1'
   actions:
   - type: gate
-    left: '%payload.pull_request.title%'
+    left: '%payload.pull_request.base.ref%'
     operator: ===
-    right: Add name to README
+    right: main
+    else:
+    - type: respond
+      with: 01_try-again.md
+  - type: respond
+    with: 01_nice-work.md
+#   - type: gate
+#     left: '%payload.pull_request.title%'
+#     operator: ===
+#     right: Add name to README
 
 # Step 2: step 2
 # - title: title 2
